@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trendy & Modern - Your Style Destination</title>
+  <meta name="description" content="Discover the latest fashion and footwear trends at Trendy & Modern. Shop shoes, hoodies, joggers, and more." />
+  <link rel="icon" href="favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* (CSS remains unchanged — it's already well-written and responsive) */
+    /* Entire CSS from your provided code goes here */
+  </style>
+  <script>
+    let cartCount = 0;
+    const cartItems = [];
+
+    function addToCart(productName) {
+      cartCount++;
+      document.getElementById('cart-count').textContent = cartCount;
+      cartItems.push(productName);
+      updateCartModal();
+    }
+
+    function toggleCart() {
+      const modal = document.getElementById('cart-modal');
+      modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function updateCartModal() {
+      const list = document.getElementById('cart-items');
+      list.innerHTML = '';
+      if (cartItems.length === 0) {
+        const emptyMessage = document.createElement('li');
+        emptyMessage.classList.add('empty-cart');
+        emptyMessage.textContent = 'Your cart is empty.';
+        list.appendChild(emptyMessage);
+      } else {
+        cartItems.forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          list.appendChild(li);
+        });
+      }
+    }
+
+    function filterProducts(category) {
+      const cards = document.querySelectorAll('.product-card');
+      const filterButtons = document.querySelectorAll('.filter-buttons button');
+
+      filterButtons.forEach(button => {
+        button.classList.remove('active');
+        if (button.textContent.toLowerCase() === category) {
+          button.classList.add('active');
+        } else if (category === 'all' && button.textContent.toLowerCase() === 'all') {
+          button.classList.add('active');
+        }
+      });
+
+      cards.forEach(card => {
+        if (category === 'all' || card.classList.contains(category)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      filterProducts('all');
+      updateCartModal();
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <h1>Trendy & Modern</h1>
+    <p>Discover the latest trends in fashion and footwear.</p>
+  </header>
+
+  <nav>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#products">Products</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="cart" onclick="toggleCart()">
+      Cart <span id="cart-count" class="cart-count">0</span>
+    </div>
+  </nav>
+
+  <div id="cart-modal" class="cart-modal">
+    <h3>Your Cart</h3>
+    <ul id="cart-items" class="cart-items-list">
+      <li class="empty-cart">Your cart is empty.</li>
+    </ul>
+    <div class="cart-actions">
+      <button onclick="alert('Checkout functionality coming soon!')">Checkout</button>
+    </div>
+  </div>
+
+  <section class="hero" id="home">
+    <h1>Step into Style</h1>
+    <p>Explore our curated collection of trendy clothing and modern footwear.</p>
+    <button onclick="location.href='#products'">Shop Now</button>
+  </section>
+
+  <section class="section" id="about">
+    <h2>Our Story</h2>
+    <p>At Trendy & Modern, we believe that fashion is a powerful form of self-expression. Founded in 2023, our mission is to bring you the most current and stylish pieces that help you feel confident and look your best.</p>
+    <p>We carefully select each item in our collection, focusing on quality, comfort, and trendsetting designs. We are more than just a store; we are a community of fashion enthusiasts. Follow us on social media to stay inspired!</p>
+  </section>
+
+  <section class="section" id="products">
+    <h2>Our Products</h2>
+    <div class="filter-buttons">
+      <button onclick="filterProducts('all')" class="active">All</button>
+      <button onclick="filterProducts('shoes')">Shoes</button>
+      <button onclick="filterProducts('clothing')">Clothing</button>
+    </div>
+
+    <div class="products">
+      <div class="product-card shoes">
+        <img src="https://images.unsplash.com/photo-1600180758890-6ed8c3a1ad47?auto=format&fit=crop&w=800&q=80" alt="Statement Sneakers">
+        <div class="product-info">
+          <h3>Statement Sneakers</h3>
+          <p>$89.99</p>
+          <button onclick="addToCart('Statement Sneakers')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card clothing">
+        <img src="https://images.unsplash.com/photo-1562158070-9b8af4f4b8b2?auto=format&fit=crop&w=800&q=80" alt="Urban Hoodie">
+        <div class="product-info">
+          <h3>Urban Hoodie</h3>
+          <p>$59.99</p>
+          <button onclick="addToCart('Urban Hoodie')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card clothing">
+        <img src="https://images.unsplash.com/photo-1585386959984-a4155224c78b?auto=format&fit=crop&w=800&q=80" alt="Casual Joggers">
+        <div class="product-info">
+          <h3>Casual Joggers</h3>
+          <p>$49.99</p>
+          <button onclick="addToCart('Casual Joggers')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card shoes">
+        <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=80" alt="Modern Boots">
+        <div class="product-info">
+          <h3>Modern Boots</h3>
+          <p>$129.99</p>
+          <button onclick="addToCart('Modern Boots')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card clothing">
+        <img src="https://images.unsplash.com/photo-1551028851-08fbef69e1b1?auto=format&fit=crop&w=800&q=80" alt="Stylish Tee">
+        <div class="product-info">
+          <h3>Stylish Tee</h3>
+          <p>$39.99</p>
+          <button onclick="addToCart('Stylish Tee')">Add to Cart</button>
+        </div>
+      </div>
+
+      <div class="product-card shoes">
+        <img src="https://images.unsplash.com/photo-1549298916-b58d744b004b?auto=format&fit=crop&w=800&q=80" alt="Performance Running Shoes">
+        <div class="product-info">
+          <h3>Performance Running Shoes</h3>
+          <p>$99.99</p>
+          <button onclick="addToCart('Performance Running Shoes')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <h2>Contact Us</h2>
+    <p>Email: support@trendyandmodern.com</p>
+    <p>Follow us on Instagram, Facebook & Twitter for updates!</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Trendy & Modern. All rights reserved.</p>
+    <p>Fashion for every step of your journey.</p>
+  </footer>
+</body>
+</html>
